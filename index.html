@@ -7,100 +7,100 @@ function computerPlay() {
     return choices[computerSelection].toLowerCase();
 }
 
-let computerSelection = computerPlay();
-let playerPlay = prompt("Rock, paper, or scissors?").toLowerCase();
-let playerSelection = playerPlay;
-let round = 0;
+let round = 1;
 let playerScore = 0;
 let computerScore = 0;
 
 //Play a single round
 function playRound(playerSelection, computerSelection) {
-        playerSelection;
-        computerPlay();
         
         if (playerSelection == computerSelection) {
-            round++;
+            ++round;
             return "Draw! Try again!";
         }
 
         else if (playerSelection == "rock" && computerSelection == "scissors") {
             playerScore++;
-            round++;
+            ++round;
             return "You win! Nice one!";
         }
 
         else if (playerSelection == "rock" && computerSelection == "paper") {
             computerScore++;
-            round++;
+            ++round;
             return "You lose! Ouch!";            
         }
 
         else if (playerSelection == "paper" && computerSelection == "rock") {
             playerScore++;
-            round++;
+            ++round;
             return "You win! Nice one!";            
         }
 
         else if (playerSelection == "paper" && computerSelection == "scissors") {
             computerScore++;
-            round++;
+            ++round;
             return "You lose! Ouch!";
         }
 
 
         else if (playerSelection == "scissors" && computerSelection == "rock") {
             computerScore++;
-            round++;
+            ++round;
             return "You lose! Ouch!";
         }
 
         else if (playerSelection == "scissors" && computerSelection == "paper") {
             playerScore++;
-            round++;
+            ++round;
             return "You win! Nice one!";
         }
 
         else {
-            round--;
             return "What was that? Try again...";
         }
     }
 
     //Play a 5-round game
     function game() {
-        console.log("You have chosen " + playerSelection);
-        console.log("PC has chosen " + computerSelection);
         
 
-        if (round < 5) {
+        if (round < 6) {
+            let playerSelection = prompt("Rock, paper, or scissors?").toLowerCase();
+            let computerSelection = computerPlay();
             console.log("Round: " + round);
-            console.log(playRound());
+            console.log("You have chosen " + playerSelection);
+            console.log("PC has chosen " + computerSelection);
+            console.log(playRound(playerSelection, computerSelection));
             console.log("Score: " + playerScore);
             console.log("PC Score: " + computerScore);
         }
 
-        else if (playerScore > computerScore) {
-            console.log("Score: " + playerScore);
-            console.log("PC Score: " + computerScore);
+    }
+    function gameEnd() {
+        if (playerScore > computerScore) {
             console.log("You win the game!")
             
         }
 
         else if (computerScore < playerScore) {
-            console.log("Score: " + playerScore);
-            console.log("PC Score: " + computerScore);
-            console.log("Game over!")
+            console.log("You lose! Game over.")
         }
 
         else if (computerScore == playerScore) {
-            console.log("Score: " + playerScore);
-            console.log("PC Score: " + computerScore);
             console.log("It's a tie!");
         }
-
     }
+
+
+        
+
     game();
+    game();
+    game();
+    game();
+    game();
+    gameEnd();
     
 
 </script>
