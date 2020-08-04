@@ -1,7 +1,8 @@
 <script>
 let choices = ["rock", "paper", "scissors"]
 
-//Lets the computer make a choice
+//Lets the computer make a choice by randomly choosing 
+//an array position and rounding down
 function computerPlay() {
     let computerSelection = Math.floor(Math.random() * choices.length);
     return choices[computerSelection].toLowerCase();
@@ -10,6 +11,7 @@ function computerPlay() {
 let round = 1;
 let playerScore = 0;
 let computerScore = 0;
+
 
 //Play a single round
 function playRound(playerSelection, computerSelection) {
@@ -61,11 +63,10 @@ function playRound(playerSelection, computerSelection) {
         }
     }
 
-    //Play a 5-round game
-    function game() {
+    //Contains the output syntax for a single round
+    function helpGameFunc() {
         
 
-        if (round < 6) {
             let playerSelection = prompt("Rock, paper, or scissors?").toLowerCase();
             let computerSelection = computerPlay();
             console.log("Round: " + round);
@@ -76,8 +77,15 @@ function playRound(playerSelection, computerSelection) {
             console.log("PC Score: " + computerScore);
         }
 
-    }
-    function gameEnd() {
+
+    function game() {
+
+        helpGameFunc();
+        helpGameFunc();
+        helpGameFunc();
+        helpGameFunc();
+        helpGameFunc();
+
         if (playerScore > computerScore) {
             console.log("You win the game!")
             
@@ -94,13 +102,8 @@ function playRound(playerSelection, computerSelection) {
 
 
         
+    game();
 
-    game();
-    game();
-    game();
-    game();
-    game();
-    gameEnd();
     
 
 </script>
