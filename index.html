@@ -1,109 +1,216 @@
-<script>
-let choices = ["rock", "paper", "scissors"]
+<html>
+    <head>
+        <title>
+            "Rock, Paper, Scissors"
+        </title>
+        <link rel="stylesheet" type="text/css" href="style.css">
 
-//Lets the computer make a choice by randomly choosing 
-//an array position and rounding down
-function computerPlay() {
-    let computerSelection = Math.floor(Math.random() * choices.length);
-    return choices[computerSelection].toLowerCase();
-}
+    </head>
 
-let round = 1;
-let playerScore = 0;
-let computerScore = 0;
+    <body>
+        <main>
+            <div id="title">
+                <h1>Rock, Paper, Scissors!</h1>
+            </div>
+
+            <div id="game-info">
+
+            </div>
+
+            <div class="button-container">
+                <button 
+                id="rock" 
+                class="btn">
+                Rock</button>
+                <button 
+                id = "paper"
+                class = btn>
+                Paper</button>
+                <button
+                id = "scissors" 
+                class ="btn">
+                Scissors</button>
+
+            </div>
 
 
-//Play a single round
-function playRound(playerSelection, computerSelection) {
+        </main>
+    </body>
+
+
+    <script>
+        let choices = ["rock", "paper", "scissors"]
         
-        if (playerSelection == computerSelection) {
-            ++round;
-            return "Draw! Try again!";
+        //Lets the computer make a choice by randomly choosing 
+        //an array position and rounding down
+        function computerPlay() {
+            let computerSelection = Math.floor(Math.random() * choices.length);
+            return choices[computerSelection].toLowerCase();
         }
-
-        else if (playerSelection == "rock" && computerSelection == "scissors") {
-            playerScore++;
-            ++round;
-            return "You win! Nice one!";
-        }
-
-        else if (playerSelection == "rock" && computerSelection == "paper") {
-            computerScore++;
-            ++round;
-            return "You lose! Ouch!";            
-        }
-
-        else if (playerSelection == "paper" && computerSelection == "rock") {
-            playerScore++;
-            ++round;
-            return "You win! Nice one!";            
-        }
-
-        else if (playerSelection == "paper" && computerSelection == "scissors") {
-            computerScore++;
-            ++round;
-            return "You lose! Ouch!";
-        }
-
-
-        else if (playerSelection == "scissors" && computerSelection == "rock") {
-            computerScore++;
-            ++round;
-            return "You lose! Ouch!";
-        }
-
-        else if (playerSelection == "scissors" && computerSelection == "paper") {
-            playerScore++;
-            ++round;
-            return "You win! Nice one!";
-        }
-
-        else {
-            return "What was that? Try again...";
-        }
-    }
-
-    //Contains the output syntax for a single round
-    function helpGameFunc() {
         
+        let round = 1;
+        let playerScore = 0;
+        let computerScore = 0;
 
-            let playerSelection = prompt("Rock, paper, or scissors?").toLowerCase();
-            let computerSelection = computerPlay();
-            console.log("Round: " + round);
-            console.log("You have chosen " + playerSelection);
-            console.log("PC has chosen " + computerSelection);
-            console.log(playRound(playerSelection, computerSelection));
-            console.log("Score: " + playerScore);
-            console.log("PC Score: " + computerScore);
-        }
+        let rockChoice = document.querySelector("#rock")
+        let paperChoice = document.querySelector("#paper")
+        let scissorsChoice = document.querySelector("#scissors")
+        
+        rock.addEventListener("click", () => {
+            playerSelection = "rock";
+            if (round <= 5){
+                game();
+                gameEnd();
+            }
 
-
-    function game() {
-
-        helpGameFunc();
-        helpGameFunc();
-        helpGameFunc();
-        helpGameFunc();
-        helpGameFunc();
-
-        if (playerScore > computerScore) {
-            console.log("You win the game!")
             
+        });
+        paper.addEventListener("click", () => {
+            playerSelection = "paper";
+            if (round <= 5){
+                game();
+                gameEnd();
+            }
+
+        });
+        scissors.addEventListener("click", () => {
+            playerSelection = "scissors";
+            if (round <= 5){
+                game();
+                gameEnd();
+            }
+
+        });
+
+        function playerButtonPress() {
+            return playerSelection;
         }
 
-        else if (computerScore < playerScore) {
-            console.log("You lose! Game over.")
-        }
+        const gameInfoContainer = document.querySelector("#game-info");
 
-        else if (computerScore == playerScore) {
-            console.log("It's a tie!");
-        }
-    }
+        const gameInfo = document.createElement("div");
+        gameInfo.classList.add("gameInfoClass");
 
-
+        const roundInfo = document.createElement("p");
+        const playerChoiceInfo = document.createElement("p");
+        const computerChoiceInfo = document.createElement("p");
+        const roundResultsInfo = document.createElement("p");
+        const playerScoreInfo = document.createElement("p");
+        const computerScoreInfo = document.createElement("p");
+        const gameEndInfo = document.createElement("p");
         
-    game();
+        gameInfo.appendChild(roundInfo);
+        gameInfo.appendChild(playerChoiceInfo);
+        gameInfo.appendChild(computerChoiceInfo);
+        gameInfo.appendChild(roundResultsInfo);
+        gameInfo.appendChild(playerScoreInfo);
+        gameInfo.appendChild(computerScoreInfo);
+        gameInfo.appendChild(gameEndInfo);
 
-    
+        gameInfoContainer.appendChild(gameInfo);
 
-</script>
+        //Increases the round and player score 
+        //Prints a message for the round result
+        function playRound(playerSelection, computerSelection) {
+                
+                if (playerSelection == computerSelection) {
+                    ++round;
+                    return "Draw!";
+                }
+        
+                else if (playerSelection == "rock" && computerSelection == "scissors") {
+                    ++playerScore;
+                    ++round;
+                    return "You win! Nice one!";
+                }
+        
+                else if (playerSelection == "rock" && computerSelection == "paper") {
+                    ++computerScore;
+                    ++round;
+                    return "You lose! Ouch!";            
+                }
+        
+                else if (playerSelection == "paper" && computerSelection == "rock") {
+                    ++playerScore;
+                    ++round;
+                    return "You win! Nice one!";            
+                }
+        
+                else if (playerSelection == "paper" && computerSelection == "scissors") {
+                    ++computerScore;
+                    ++round;
+                    return "You lose! Ouch!";
+                }
+        
+        
+                else if (playerSelection == "scissors" && computerSelection == "rock") {
+                    ++computerScore;
+                    ++round;
+                    return "You lose! Ouch!";
+                }
+        
+                else if (playerSelection == "scissors" && computerSelection == "paper") {
+                    ++playerScore;
+                    ++round;
+                    return "You win! Nice one!";
+                }
+        
+                else {
+                    return "What was that? Try again...";
+                }
+            }
+            
+            //Show's round info - player choices, round number etc.
+            function game() {
+                    let computerSelection = computerPlay();
+                    roundInfo.textContent = "Round: " + round;
+                    console.log("Round: " + round);
+                    playerChoiceInfo.textContent = "You have chosen " +
+                    playerSelection;
+                    console.log("You have chosen " + playerSelection);
+                    computerChoiceInfo.textContent = "PC has chosen " +
+                    computerSelection;
+                    console.log("PC has chosen " + computerSelection);
+                    roundResultsInfo.textContent = playRound(playerSelection, computerSelection);
+                    playerScoreInfo.textContent = "Score: " + playerScore;
+                    computerScoreInfo.textContent = "PC Score: " + computerScore;
+                    console.log("Score: " + playerScore);
+                    console.log("PC Score: " + computerScore);                    
+                }
+        
+            //Displays the winner/loser and ends the game
+            function gameEnd() {
+                if (round > 5){      
+                    if (playerScore > computerScore) {
+                        gameEndInfo.textContent = "Game over. You win the game!";
+                        console.log("Game over. You win!")
+                        
+                    }
+            
+                    else if (playerScore < computerScore) {
+                        gameEndInfo.textContent = "Game over. You lose.";
+                        console.log("Game over. You lose.")
+                    }
+            
+                    else if (playerScore == computerScore) {
+                        gameEndInfo.textContent = "Game over. It's a tie!";
+                        console.log("Game over. It's a tie!");
+                    }
+
+                    //Reset button, not functional yet...
+                    //const buttonContainer = document.querySelector(".button-container");
+
+                    //const reset = document.createElement("button");
+                    //reset.setAttribute("type", "reset");
+                    //reset.setAttribute("value", "Reset");
+
+                    //buttonContainer.appendChild(reset);
+                }
+            }
+        
+                
+        
+        
+        </script>
+
+</html>
